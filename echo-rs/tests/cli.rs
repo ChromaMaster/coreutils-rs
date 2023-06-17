@@ -28,7 +28,7 @@ fn it_runs_with_multiple_arguments() -> TestResult {
 
 #[test]
 fn it_omits_newline_with_multiple_arguments() -> TestResult {
-    run(&["-n", "hello", "world"], "hello  world")
+    run(&["-n", "hello", "world"], "hello world")
 }
 
 fn run(args: &[&str], expected_output: &'static str) -> TestResult {

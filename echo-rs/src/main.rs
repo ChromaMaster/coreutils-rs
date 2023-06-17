@@ -1,4 +1,5 @@
 use clap::{Arg, Command};
+use echo_rs::Config;
 
 fn cli() -> Command {
     Command::new("My super command")
@@ -23,15 +24,7 @@ fn main() {
     let matches = cli().get_matches();
 
     let omit_newline = matches.get_flag("omit_newline");
-    let text = matches.get_many::<String>("text")
-        .unwrap()
-        .map(|s| s.as_str().trim())
-        .collect::<Vec<_>>()
-        .join(" ");
+    let input = matches.get_many::<String>("text").unwrap().collect::<Vec<&String>>();
 
-    if omit_newline {
-        print!("{}", text);
-    } else {
-        println!("{}", text);
-    }
+    echo_rs::run(Config { omit_newline }, input)
 }
